@@ -1,10 +1,15 @@
 package com.example.nyuuwa;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.media.Image;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -43,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(binding.navView, navController);
 
         // ListViewに表示する初期値
-        data.add("よろしくお願いします！");
+//         data.add("\uD83E\uDDD4 　部長の田中です");
 
         // リスト項目とListViewを対応付けるArrayAdapterを用意する
         ArrayAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, data);
@@ -55,10 +60,15 @@ public class MainActivity extends AppCompatActivity {
 
     /** button クリック時 */
     public void sendMessage(View view) {
-        // 入力されたテキストを参照
+        // 入力されたテキストをListViewの項目に追加
         EditText editText = (EditText) findViewById(R.id.msg);
         String value = editText.getText().toString();
-        data.add(value);
+        if(value.length() == 0) {
+            // 入力テキストがない場合
+            return;
+        }
+        // アイコンと名前を追加
+        data.add("\uD83E\uDDD4　" + value);
 
         // リスト項目とListViewを対応付けるArrayAdapterを用意する
         ArrayAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, data);
