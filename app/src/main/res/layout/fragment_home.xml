@@ -23,60 +23,20 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.898" />
 
-<!--    <Button-->
-<!--        android:id="@+id/button"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text="@string/button"-->
-<!--        android:hint=""-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.949"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        app:layout_constraintVertical_bias="0.868" />-->
-
-<!--    <ListView-->
-<!--        android:id="@+id/history"-->
-<!--        android:layout_width="344dp"-->
-<!--        android:layout_height="511dp"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.492"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        app:layout_constraintVertical_bias="0.313" />-->
-
-<!--    <EditText-->
-<!--        android:id="@+id/editText"-->
-<!--        android:layout_width="273dp"-->
-<!--        android:layout_height="55dp"-->
-<!--        android:autofillHints=""-->
-<!--        android:ems="10"-->
-<!--        android:hint="@string/TextInputMessage"-->
-<!--        android:inputType="textPersonName"-->
-<!--        android:textColorHint="#757575"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.115"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        app:layout_constraintVertical_bias="0.877" />-->
-
     <ListView
-        android:id="@+id/msgview"
-        android:layout_width="341dp"
-        android:layout_height="520dp"
+        android:id="@+id/listView"
+        android:layout_width="343dp"
+        android:layout_height="558dp"
         android:layout_weight="1"
         android:background="@null"
         android:divider="@null"
         android:stackFromBottom="true"
         android:transcriptMode="alwaysScroll"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.161"></ListView>
+        app:layout_constraintVertical_bias="0.695"></ListView>
 
     <LinearLayout
         android:id="@+id/linearLayout"
