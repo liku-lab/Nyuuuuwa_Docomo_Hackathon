@@ -1,54 +1,84 @@
 package com.example.nyuuwa;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.provider.FontRequest;
+
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
-
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
-
-import com.example.nyuuwa.databinding.ActivityMainBinding;
+import android.view.View.OnClickListener;
+import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements OnClickListener {
 
-    private ActivityMainBinding binding;
+    static final String TAG = "ListViewTest";
+
+    private EditText editText;
+
+    static List<String> dataList = new ArrayList<String>();
+    static ArrayAdapter<String> adapter;
+
+    ListView listView;
+    Button addButton;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_home);
+        setContentView(R.layout.activity_main);
+        findViews();
+        setListeners();
+        setAdapters();
+    }
 
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+    protected void findViews(){
+        listView = (ListView)findViewById(R.id.listView1);
+        addButton = (Button)findViewById(R.id.button);
+        editText = (EditText)findViewById(R.id.edit_text);
+    }
 
-        BottomNavigationView navView = findViewById(R.id.nav_view);
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications)
-                .build();
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
-        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-        NavigationUI.setupWithNavController(binding.navView, navController);
+    protected void setListeners(){
+        addButton.setOnClickListener(this);
+    }
 
-        // ListViewに表示するリスト項目をArrayListで準備する
-        ArrayList data = new ArrayList<>();
-        data.add("こんにちわ");
-        data.add("よろしく");
+    @Override
+    public void onClick(View v) {
+        switch(v.getId()){
+            case R.id.button:
+                addItem();
+                //break;
+        }
+    }
 
-        // リスト項目とListViewを対応付けるArrayAdapterを用意する
-        ArrayAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, data);
-
-        // ListViewにArrayAdapterを設定する
-        ListView listView = (ListView)findViewById(R.id.listView);
+    protected void setAdapters(){
+        adapter = new ArrayAdapter<String>(
+                this,
+                android.R.layout.simple_list_item_1,
+                dataList);
         listView.setAdapter(adapter);
     }
+
+    protected void addItem(){
+
+        String text = editText.getText().toString();
+
+        char lastChar = text.charAt(text.length() - 1);
+
+        if (lastChar == '。') {
+            text = text.replace("。", "\uD83D\uDE2E");
+        }
+        else {
+            String ch = "\uD83D\uDE2E";
+            text = text + ch;
+        }
+        adapter.add(text);
+    }
+
+
 }
