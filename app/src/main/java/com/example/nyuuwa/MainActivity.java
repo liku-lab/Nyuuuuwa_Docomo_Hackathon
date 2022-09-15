@@ -40,6 +40,8 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // 引数の「xxx.db」部分はDBファイル名を指定
+//        deleteDatabase("xxxx.db");
         setContentView(R.layout.activity_main);
         findViews();
         setListeners();
@@ -78,8 +80,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
                 android.R.layout.simple_list_item_1,
                 dataList);
         listView.setAdapter(adapter);
-        readData();
-
+       readData();
     }
 
     protected void symbol2emoji(){
@@ -102,6 +103,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
 //        「? or ？」変換
         text = text.replace("?","\uD83E\uDD14");
         text = text.replace("？","\uD83E\uDD14");
+        saveData(name,text);
         adapter.add(text);
     }
 
@@ -141,7 +143,9 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         cursor.moveToFirst();
 
         for (int i = 0; i < cursor.getCount(); i++) {
-            adapter.add(cursor.getString(0));
+            if(cursor.getCount()==i+1) {
+                adapter.add(cursor.getString(0));
+            }
             cursor.moveToNext();
         }
 

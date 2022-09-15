@@ -61,7 +61,7 @@ public class SubActivity extends AppCompatActivity implements OnClickListener {
     public void onClick(View v) {
         switch(v.getId()){
             case R.id.sbutton:
-                addItem();
+                symbol2emoji();
                 break;
             case R.id.cbutton:
                 changeButton();
@@ -79,19 +79,39 @@ public class SubActivity extends AppCompatActivity implements OnClickListener {
         readData();
     }
 
-    protected void addItem(){
+    protected void symbol2emoji(){
 
-        String text = editText.getText().toString();
+//        String text = editText.getText().toString();
+//
+//        char lastChar = text.charAt(text.length() - 1);
+//
+//        if (lastChar == '。') {
+//            text = name + text.replace("。", "\uD83D\uDE2E");
+//        }
+//        else {
+//            String ch = "\uD83D\uDE2E";
+//            text = name + text + ch;
+//        }
+        String text  = editText.getText().toString();
 
+//        文末に「。」追加
         char lastChar = text.charAt(text.length() - 1);
-
         if (lastChar == '。') {
-            text = text.replace("。", "\uD83D\uDE2E");
+        } else {
+            if ((lastChar == '?') || (lastChar == '？')) {
+            } else {
+                text = text + "。";
+            }
         }
-        else {
-            String ch = "\uD83D\uDE2E";
-            text = text + ch;
-        }
+
+//        「、」変換
+        text = text.replace("、", "\uD83D\uDE04");
+//        「。」変換
+        text = text.replace("。", "\uD83D\uDE0A");
+//        「? or ？」変換
+        text = text.replace("?","\uD83E\uDD14");
+        text = text.replace("？","\uD83E\uDD14");
+        text = name + text;
         saveData(name,text);
         adapter.add(text);
     }
@@ -132,7 +152,9 @@ public class SubActivity extends AppCompatActivity implements OnClickListener {
         cursor.moveToFirst();
 
         for (int i = 0; i < cursor.getCount(); i++) {
-            adapter.add(cursor.getString(0));
+            if(cursor.getCount()==i+1) {
+                adapter.add(cursor.getString(0));
+            }
             cursor.moveToNext();
         }
 
