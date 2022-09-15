@@ -1,6 +1,9 @@
 package com.example.nyuuwa;
 
 import android.os.Bundle;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ListView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -12,6 +15,8 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.example.nyuuwa.databinding.ActivityMainBinding;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
@@ -19,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.fragment_home);
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -32,6 +38,17 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
-    }
 
+        // ListViewに表示するリスト項目をArrayListで準備する
+        ArrayList data = new ArrayList<>();
+        data.add("こんにちわ");
+        data.add("よろしく");
+
+        // リスト項目とListViewを対応付けるArrayAdapterを用意する
+        ArrayAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, data);
+
+        // ListViewにArrayAdapterを設定する
+        ListView listView = (ListView)findViewById(R.id.listView);
+        listView.setAdapter(adapter);
+    }
 }
