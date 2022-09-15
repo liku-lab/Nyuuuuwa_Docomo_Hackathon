@@ -23,7 +23,8 @@ public class SubActivity extends AppCompatActivity implements OnClickListener {
     static final String TAG = "ListViewTest";
 
     private EditText editText;
-    private String name = "sub";
+//    private String name = "sub";
+    private String name = "";
 
     static List<String> dataList = new ArrayList<String>();
     static ArrayAdapter<String> adapter;
@@ -73,7 +74,7 @@ public class SubActivity extends AppCompatActivity implements OnClickListener {
     protected void setAdapters(){
         adapter = new ArrayAdapter<String>(
                 this,
-                android.R.layout.simple_list_item_1,
+                R.layout.list,
                 dataList);
         listView.setAdapter(adapter);
         readData();
@@ -93,6 +94,12 @@ public class SubActivity extends AppCompatActivity implements OnClickListener {
 //            text = name + text + ch;
 //        }
         String text  = editText.getText().toString();
+        if(text.length() == 0) {
+            // 入力テキストがない場合
+            return;
+        }
+        // アイコンと名前を追加
+        text = "\uD83E\uDDD6　" + text;
 
 //        文末に「。」追加
         char lastChar = text.charAt(text.length() - 1);
@@ -114,6 +121,9 @@ public class SubActivity extends AppCompatActivity implements OnClickListener {
         text = name + text;
         saveData(name,text);
         adapter.add(text);
+
+        // 入力テキストを削除
+        editText.getText().clear();
     }
 
     // クリック処理
