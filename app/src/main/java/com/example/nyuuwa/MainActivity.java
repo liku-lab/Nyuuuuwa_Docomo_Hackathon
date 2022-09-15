@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
     public void onClick(View v) {
         switch(v.getId()){
             case R.id.button:
-                addItem();
+                symbol2emoji();
                 //break;
         }
     }
@@ -64,21 +64,27 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         listView.setAdapter(adapter);
     }
 
-    protected void addItem(){
+//  記号を絵文字に変換
+    protected void symbol2emoji(){
+        String text  = editText.getText().toString();
 
-        String text = editText.getText().toString();
-
+//        文末に「。」追加
         char lastChar = text.charAt(text.length() - 1);
-
         if (lastChar == '。') {
-            text = text.replace("。", "\uD83D\uDE2E");
+        } else {
+            if ((lastChar == '?') || (lastChar == '？')) {
+            } else {
+                text = text + "。";
+            }
         }
-        else {
-            String ch = "\uD83D\uDE2E";
-            text = text + ch;
-        }
+
+//        「、」変換
+        text = text.replace("、", "\uD83D\uDE04");
+//        「。」変換
+        text = text.replace("。", "\uD83D\uDE0A");
+//        「? or ？」変換
+        text = text.replace("?","\uD83E\uDD14");
+        text = text.replace("？","\uD83E\uDD14");
         adapter.add(text);
     }
-
-
 }
