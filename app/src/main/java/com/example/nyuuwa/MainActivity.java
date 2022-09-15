@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.sbutton:
-                addItem();
+                symbol2emoji();
                 break;
             case R.id.cbutton:
                 changeButton();
@@ -82,19 +82,26 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
 
     }
 
-    protected void addItem() {
+    protected void symbol2emoji(){
+        String text  = editText.getText().toString();
 
-        String text = editText.getText().toString();
-
+//        文末に「。」追加
         char lastChar = text.charAt(text.length() - 1);
-
         if (lastChar == '。') {
-            text = text.replace("。", "\uD83D\uDE2E");
         } else {
-            String ch = "\uD83D\uDE2E";
-            text = text + ch;
+            if ((lastChar == '?') || (lastChar == '？')) {
+            } else {
+                text = text + "。";
+            }
         }
-        saveData(name,text);
+
+//        「、」変換
+        text = text.replace("、", "\uD83D\uDE04");
+//        「。」変換
+        text = text.replace("。", "\uD83D\uDE0A");
+//        「? or ？」変換
+        text = text.replace("?","\uD83E\uDD14");
+        text = text.replace("？","\uD83E\uDD14");
         adapter.add(text);
     }
 
