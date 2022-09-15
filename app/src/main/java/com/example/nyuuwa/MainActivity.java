@@ -1,8 +1,10 @@
 package com.example.nyuuwa;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -20,6 +22,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
+    ArrayList data = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,10 +42,8 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
 
-        // ListViewに表示するリスト項目をArrayListで準備する
-        ArrayList data = new ArrayList<>();
-        data.add("こんにちわ");
-        data.add("よろしく");
+        // ListViewに表示する初期値
+        data.add("よろしくお願いします！");
 
         // リスト項目とListViewを対応付けるArrayAdapterを用意する
         ArrayAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, data);
@@ -50,5 +51,23 @@ public class MainActivity extends AppCompatActivity {
         // ListViewにArrayAdapterを設定する
         ListView listView = (ListView)findViewById(R.id.listView);
         listView.setAdapter(adapter);
+    }
+
+    /** button クリック時 */
+    public void sendMessage(View view) {
+        // 入力されたテキストを参照
+        EditText editText = (EditText) findViewById(R.id.msg);
+        String value = editText.getText().toString();
+        data.add(value);
+
+        // リスト項目とListViewを対応付けるArrayAdapterを用意する
+        ArrayAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, data);
+
+        // ListViewにArrayAdapterを設定する
+        ListView listView = (ListView)findViewById(R.id.listView);
+        listView.setAdapter(adapter);
+
+        // 入力テキストを削除
+        editText.getText().clear();
     }
 }

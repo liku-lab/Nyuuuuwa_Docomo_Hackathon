@@ -25,18 +25,18 @@
 
     <ListView
         android:id="@+id/listView"
-        android:layout_width="343dp"
-        android:layout_height="558dp"
+        android:layout_width="332dp"
+        android:layout_height="381dp"
         android:layout_weight="1"
         android:background="@null"
         android:divider="@null"
         android:stackFromBottom="true"
         android:transcriptMode="alwaysScroll"
-        app:layout_constraintBottom_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.695"></ListView>
+        app:layout_constraintVertical_bias="0.0"></ListView>
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -65,7 +65,8 @@
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:layout_weight="1"
-            android:text="@string/button" />
+            android:text="@string/button"
+            android:onClick="sendMessage" />
 
     </LinearLayout>
 
