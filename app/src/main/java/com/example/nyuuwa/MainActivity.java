@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
                 R.layout.list,
                 dataList);
         listView.setAdapter(adapter);
-       readData();
+        readData();
     }
 
 
@@ -127,6 +127,11 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
 //        「? or ？」変換
         text = text.replace("?","\uD83E\uDD14");
         text = text.replace("？","\uD83E\uDD14");
+
+//        「テキスト」変換
+        text = text.replace("なんで","どうして");
+        text = text.replace("何で","どうして");
+
         saveData(name,text);
 
         // 入力テキストを削除

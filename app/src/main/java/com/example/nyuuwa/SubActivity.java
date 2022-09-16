@@ -25,7 +25,7 @@ public class SubActivity extends AppCompatActivity implements OnClickListener {
     static final String TAG = "ListViewTest";
 
     private EditText editText;
-//    private String name = "sub";
+    //    private String name = "sub";
     private String name = "";
 
     static List<String> dataList = new ArrayList<String>();
@@ -121,6 +121,11 @@ public class SubActivity extends AppCompatActivity implements OnClickListener {
 //        「? or ？」変換
         text = text.replace("?","\uD83E\uDD14");
         text = text.replace("？","\uD83E\uDD14");
+
+//        「テキスト」変換 何でそれをしたの？
+        text = text.replace("なんで","どうして");
+        text = text.replace("何で","どうして");
+
         text = name + text;
         saveData(name,text);
 
