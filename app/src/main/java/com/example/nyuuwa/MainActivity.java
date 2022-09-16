@@ -124,13 +124,15 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         text = text.replace("、", "\uD83D\uDE04");
 //        「。」変換
         text = text.replace("。", "\uD83D\uDE0A");
-//        「? or ？」変換
-        text = text.replace("?","\uD83E\uDD14");
-        text = text.replace("？","\uD83E\uDD14");
 
 //        「テキスト」変換
         text = text.replace("なんで","どうして");
         text = text.replace("何で","どうして");
+        text = text.replace("した？","したの〜\uD83E\uDD14");
+
+//        「? or ？」変換
+        text = text.replace("?","\uD83E\uDD14");
+        text = text.replace("？","\uD83E\uDD14");
 
         saveData(name,text);
 
