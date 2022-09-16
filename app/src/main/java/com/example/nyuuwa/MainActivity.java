@@ -106,8 +106,12 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
             // 入力テキストがない場合
             return;
         }
-        // アイコンと名前を追加
-        text = "\uD83E\uDDD4　" + text;
+        if(text.length() < 10) {
+            // アイコンと名前を追加
+            text = "\uD83E\uDDD4　" + text;
+        } else {
+            text = "\uD83E\uDDD4　\n " + text;
+        }
         adapter.add(text);
 
 //        文末に「。」追加
