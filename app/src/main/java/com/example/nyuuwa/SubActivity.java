@@ -20,12 +20,13 @@ import android.view.View.OnClickListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements OnClickListener {
+public class SubActivity extends AppCompatActivity implements OnClickListener {
 
     static final String TAG = "ListViewTest";
 
     private EditText editText;
-    private String name = "main";
+//    private String name = "sub";
+    private String name = "";
 
     static List<String> dataList = new ArrayList<String>();
     static ArrayAdapter<String> adapter;
@@ -33,16 +34,12 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
     private TestOpenHelper helper;
     private SQLiteDatabase db;
 
-
     ListView listView;
     Button sendButton;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // 引数の「xxx.db」部分はDBファイル名を指定
-//        deleteDatabase("xxxx.db");
         setContentView(R.layout.activity_main);
         findViews();
         setListeners();
@@ -67,47 +64,44 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
     }
 
 
-
-    protected void findViews() {
-        listView = (ListView) findViewById(R.id.listView1);
-        sendButton = (Button) findViewById(R.id.sbutton);
-        editText = (EditText) findViewById(R.id.edit_text);
+    protected void findViews(){
+        listView = (ListView)findViewById(R.id.listView1);
+        sendButton = (Button)findViewById(R.id.sbutton);
+        editText = (EditText)findViewById(R.id.edit_text);
     }
 
-    protected void setListeners() {
+    protected void setListeners(){
         sendButton.setOnClickListener(this);
     }
 
-
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
+        switch(v.getId()){
             case R.id.sbutton:
                 symbol2emoji();
                 break;
         }
     }
 
-
-    protected void setAdapters() {
+    protected void setAdapters(){
         adapter = new ArrayAdapter<String>(
                 this,
                 R.layout.list,
                 dataList);
         listView.setAdapter(adapter);
-       readData();
+        readData();
     }
 
-
     protected void symbol2emoji(){
-        String text  = editText.getText().toString();
 
+        String text  = editText.getText().toString();
         if(text.length() == 0) {
             // 入力テキストがない場合
             return;
         }
         // アイコンと名前を追加
-        text = "\uD83E\uDDD4　" + text;
+        text = "\uD83E\uDDD6　" + text;
+
         adapter.add(text);
 
 //        文末に「。」追加
@@ -127,6 +121,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
 //        「? or ？」変換
         text = text.replace("?","\uD83E\uDD14");
         text = text.replace("？","\uD83E\uDD14");
+        text = name + text;
         saveData(name,text);
 
         // 入力テキストを削除
@@ -134,8 +129,8 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
     }
 
     // クリック処理
-    protected void changeButton() {
-        Intent intent = new Intent(this, SubActivity.class); // 画面指定
+    protected void changeButton(){
+        Intent intent = new Intent(this,MainActivity.class); // 画面指定
         startActivity(intent);                          //  画面を開く
     }
 
@@ -180,5 +175,6 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
 
 
     }
+
 
 }
