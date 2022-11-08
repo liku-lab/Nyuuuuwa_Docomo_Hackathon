@@ -1,2 +1,2 @@
 # docomo_huckathon
-docomo huckathon repository on Github
+ドコモのハッカソンで作成したテキスト柔和化サービス．ハッカソンの結果1位に．
